@@ -6,6 +6,7 @@
 \renewcommand{\baselinestretch}{1.1}
 
 \newcommand{\Invol}{{\sf Invol}}
+\newcommand{\Dd}{{\,\diamond\,}}
 \newcommand{\Eqns}{{\sf Eqns}}
 \newcommand{\eq}{{\;\approx\;}}    
 
@@ -20,16 +21,23 @@
 \maketitle
 
 \section{The formula}
-The symbol $+$ will be used for {\it the binary operation} of magma equations. The {\it order of a magma term} is the number of occurrences of $+$ in the term. Thus the order of $(x+y) + (x + z)$ is 3. There is an obvious 1-1 correspondence between magma terms of order $n$ and plane binary trees of order $n$ with the leaves labelled by the variables in the term. Let
+The symbol $\Dd$ will be used for {\it the binary operation} of magma equations. 
+The {\it order of a magma term} is the number of occurrences of $\Dd$ in the term. 
+Thus the order of $(x \Dd y) \Dd (x \Dd z)$ is 3. 
+There is an obvious mapping from terms of order $n$ to plane binary trees of order $n$. 
+(Additionally the leaves can be naturally labelled by the variables in the term to make the mapping a
+bijection.)
+Let
 $$
-T(n) := \frac{1}{n+1} \cdot {2n \choose n}
+T(n) = \frac{1}{n+1} \cdot {2n \choose n} \ .
 $$
 This counts the number of plane binary trees of order $n$.
 
-The {\it order of a magma equation} is the sum of the orders of the two sides. Thus the order of $(x+y) +(x+z) = z + (x +x)$ is 5. 
-The equation $(v+w) +(v+u) = u + (v +v)$ obtained by relabelling the variables is considered to be ``the same'' as the previous equation as far as counting is concerned, as is the equation 
-$ z + (x +x) = (x+y) +(x+z) $
-obtained by switching the two terms. The only equation of the form $t = t$ that will be included in the count is $x=x$.
+The {\it order of a magma equation} is the sum of the orders of the two sides. 
+Thus the order of $(x \Dd y)  \Dd (x \Dd z) \approx z  \Dd  (x  \Dd x)$ is 5. 
+The equation $(v \Dd w)  \Dd (v \Dd u) \approx u  \Dd  (v  \Dd v)$ obtained by relabelling the variables is considered to be ``the same'' as the previous equation as far as counting is concerned, as is the equation 
+$ z  \Dd  (x  \Dd x) \approx (x \Dd y)  \Dd (x \Dd z) $
+obtained by switching the two terms. 
 
 The {\it Stirling numbers $n \brace m$ of the second kind} count the number of ways to partition a set of $n$ elements into $m$ non-empty subsets.
 
@@ -40,7 +48,7 @@ $$
 $$
 
 For non-negative integers $a_1, a_2$ let $\fbox{$E(a_1,a_2)$}$ be the number of magma equations 
-$t_1 \approx t_2$ with $t_i$ of order $a_i$, counting up to relabelling, up to switching terms, and only allowing the equation $x\approx$ of the form $t \approx t$. 
+$t_1 \approx t_2$ with $t_i$ of order $a_i$, counting up to relabelling, up to switching terms, and only allowing the equation $x\approx x$ of the form $t \approx t$. Then the following holds:
 
 \pagebreak
 
@@ -54,11 +62,11 @@ $$
 
 $\bullet$ If \fbox{$a_1= a_2 = a>0$}: 
 \begin{align*}
-E(a,a) = &\frac{1}{2} T(a)^2\cdot \sum_{\substack{1 \le p_1,p_2 \le a+1\\ 0\le s \le \min(p_1,p_2)}} 
+E(a,a) =\ &\frac{1}{2} T(a)^2\cdot \sum_{\substack{1 \le p_1,p_2 \le a+1\\ 0\le s \le \min(p_1,p_2)}} 
 {a+1 \brace p_1} {a+1 \brace p_2} {p_1 \choose s} {p_2 \choose s} s! \\
 &+ \frac{1}{2} T(a) \cdot \sum_{\substack{1 \le p \le a+1\\ 0\le s \le p}} 
 {a+1 \brace p}  {p \choose s}  \Invol(s)\\
-&- T(a)\cdot \sum_{1\le p \le a+1}  {a+1 \brace p} \ .
+&\quad - T(a)\cdot \sum_{1\le p \le a+1}  {a+1 \brace p} \ .
 \end{align*}
 
 Let $\Eqns(n)$ be the number of magma equations of order $n$ (under the given constraints). Then
@@ -124,7 +132,8 @@ The variable associated to a block of $\pi_i$ is the variable at all the locatio
 Number the blocks of $\pi_i$ by $1,\ldots,p_i$ such that for $1 \le j<k \le p_i$ the least member of the
 $j$th block is less than the least member of the $k$th block.
 \item
-$S_i$ is the set of block numbers whose associated variables appear on both sides of the equation.
+$S_i$ is the set of block numbers from $\{1,\ldots,p_i\}$ whose associated variables in $t_i$ appear 
+on both sides of the equation.
 \item
 For $j \in S_1$, $\beta(j)$ is the number of the block in $S_2$ whose associated variable is the same as that associated to block number $j$ in $S_1$. 
 \end{itemize}
@@ -146,14 +155,17 @@ T(a_1)\cdot T(a_2)\cdot \sum_{\substack{1 \le p_1 \le a_1+1\\ 1 \le p_2 \le a_2+
 {a_1+1 \brace p_1} {a_2+1 \brace p_2} {p_1 \choose s} {p_2\choose s} s! \ .
 \end{equation}
 
-Counting equations up to relabelling and symmetry means that one does not count both 
-$t_1 \approx t_2$ and $t_2 \approx t_1$ when their frames are different. To accomplish this
-when counting equations of order $n$ (that is, when $a_1 + a_2 = n$) the first step is simply to count
-only one of $\Phi(a_1,a_2)$ and $\Phi(a_2,a_1)$ when $a_1 \neq a_2$, say only count
+Counting equations up to relabelling and symmetry means that one treats
+$t_1 \approx t_2$ and $t_2 \approx t_1$ as a single equation.
+This means that when their frames are different only one frame is counted. 
+To accomplish this when counting all equations of order $n$ (that is, when $a_1 + a_2 = n$) 
+the first step is simply to count
+only one of $\Phi(a_1,a_2)$ and $\Phi(a_2,a_1)$ when $a_1 \neq a_2$, say only count $\Phi(a_1,a_2)$
  when $a_1<a_2$. 
 
 The case $a_1=a_2 = a$, which only occurs when $n$ is even, requires more consideration since
-the frames of $t_1 \approx t_2$ and $t_2 \approx t_1$ are both in $\Phi(a,a)$.
+the frames of $t_1 \approx t_2$ and $t_2 \approx t_1$ are both in $\Phi(a,a)$, and sometimes
+they are the same, sometimes they are distinct.
  Given $$\Phi(t_1 \approx t_2) = (T_1,\pi_1,S_1, \beta, T_2, \pi_2, S_2)$$ one has
  $$\Phi(t_2 \approx t_1) = (T_2, \pi_2, S_2, \beta^{-1}, T_1, \pi_1, S_1).$$
  The two equations have the same frame iff 
